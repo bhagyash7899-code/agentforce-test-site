@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent Testing Portal</title>
+<style>
+body {font-family: Arial, sans-serif; margin:40px; background:#f4f6f9;}
+h1 {color:#333;}
+.tabs {margin-bottom:20px;}
+.tab {padding:12px 20px; border:none; cursor:pointer; background:#0070d2; color:white; margin-right:10px; border-radius:5px;}
+.tab:hover {background:#005fb2;}
+.content {background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.field {margin-bottom:10px;}
+.label {font-weight:bold;}
+</style>
+</head>
+<body>
+
+<h1>Agent Testing Portal</h1>
+
+<div class="tabs">
+<button class="tab" onclick="navigate('funding')">Funding</button>
+<button class="tab" onclick="navigate('researcher')">Researcher</button>
+<button class="tab" onclick="navigate('lifesciences')">Life Sciences</button>
+</div>
+
+<div id="content" class="content"></div>
+
+<script>
+const pages = {
+funding: `
+<h2>Funding Information</h2>
+<div class="field"><span class="label">Name:</span> Sarah Johnson</div>
+<div class="field"><span class="label">Email:</span> sarah.johnson@testfund.org</div>
+<div class="field"><span class="label">Location:</span> New York, USA</div>
+<div class="field"><span class="label">Interested Program:</span> Early Career Research Grant</div>`,
+researcher: `
+<h2>Researcher Information</h2>
+<div class="field"><span class="label">Name:</span> Dr. Michael Chen</div>
+<div class="field"><span class="label">Email:</span> michael.chen@researchlab.com</div>
+<div class="field"><span class="label">Location:</span> Boston, USA</div>
+<div class="field"><span class="label">Interested Program:</span> AI for Healthcare Fellowship</div>`,
+lifesciences: `
+<h2>Life Sciences Information</h2>
+<div class="field"><span class="label">Name:</span> Emily Rodriguez</div>
+<div class="field"><span class="label">Email:</span> emily.rodriguez@lifescience.org</div>
+<div class="field"><span class="label">Location:</span> San Diego, USA</div>
+<div class="field"><span class="label">Interested Program:</span> Genomics Innovation Accelerator</div>`
+};
+
+function renderPage(page){
+document.getElementById('content').innerHTML = pages[page] || pages.funding;
+}
+function navigate(page){
+window.location.hash = page;
+renderPage(page);
+}
+window.addEventListener('load', ()=>{
+const page = window.location.hash.replace('#','') || 'funding';
+renderPage(page);
+});
+window.addEventListener('hashchange', ()=>{
+const page = window.location.hash.replace('#','') || 'funding';
+renderPage(page);
+});
+</script>
+
+</body>
+</html>
